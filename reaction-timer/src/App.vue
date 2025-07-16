@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <h1>Reaction Timer</h1>
+</template>
 
 <script>
 export default {
