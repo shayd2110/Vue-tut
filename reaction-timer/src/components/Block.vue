@@ -14,16 +14,7 @@ export default {
     console.log("component mounted ");
     setTimeout(() => {
       this.showBlock = true;
-      setTimeout(() => {
-        this.showBlock = false;
-      }, 1000);
     }, this.delay);
-  },
-  updated() {
-    console.log("component updated");
-  },
-  unmounted() {
-    console.log("component unmounted");
   },
 };
 </script>
