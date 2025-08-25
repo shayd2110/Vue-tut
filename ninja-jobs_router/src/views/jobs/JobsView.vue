@@ -12,12 +12,26 @@
 export default {
   data() {
     return {
-      jobs: [
-        { id: 1, title: "Frontend Developer", company: "Tech Co." },
-        { id: 2, title: "Backend Developer", company: "Web Solutions" },
-        { id: 3, title: "Full Stack Developer", company: "Innovatech" },
-      ],
+      // Using static data
+      /*       jobs: [
+              { id: 1, title: "Frontend Developer", company: "Tech Co." },
+              { id: 2, title: "Backend Developer", company: "Web Solutions" },
+              { id: 3, title: "Full Stack Developer", company: "Innovatech" },
+            ], */
+
+      // Using local db.json file with json-server
+      jobs: [],
     };
+  },
+  mounted() {
+    fetch("http://localhost:3000/jobs")
+      .then((response) => response.json())
+      .then((data) => {
+        this.jobs = data;
+      })
+      .catch((error) => {
+        console.error("Error fetching jobs:", error);
+      });
   },
 };
 </script>
