@@ -20,14 +20,18 @@
     <!-- <h3>Matched Names:</h3> -->
     <!-- <div v-for="name in matchedNames" :key="name">{{ name }}</div> -->
     <!-- <button @click="handleClick">Stop Watches</button> -->
+
+    <PostsList :posts="posts" />
   </div>
 </template>
 
 <script>
 import { computed, reactive, ref, watch, watchEffect } from "vue";
+import PostsList from "@/components/PostsList.vue";
 
 export default {
   name: "HomeView",
+  components: { PostsList },
   setup: () => {
     /* declare p here to use it in setup()
     console.log("setup");
@@ -64,9 +68,11 @@ export default {
     const matchedNames = computed(() => {
       return names.value.filter((name) => name.toLowerCase().includes(search.value.toLowerCase()));
     }); */
+    const loremBody =
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic eos ut delectus unde! Quae nulla nisi sed quasi dolorum quod doloribus cum commodi, ex dolores iure enim consequatur numquam iste expedita deserunt omnis perferendis pariatur eligendi natus tenetur ullam nobis asperiores. Aliquam nihil, enim, magni maiores saepe rerum, assumenda at libero reprehenderit aperiam provident in veniam explicabo laborum quaerat architecto dolor et corrupti quas error culpa? Voluptas sint odit quisquam doloribus incidunt quae facere ipsa illum consequatur natus, molestiae eligendi quam quasi, officiis suscipit dolores distinctio non. Animi vero consectetur officia, autem sequi impedit rerum aliquid sunt at vel voluptatum.";
     const posts = ref([
-      { title: "welcome to the blog", body: "lorem ipsum dolor sit amet...", id: 1 },
-      { title: "top 5 CSS tricks", body: "lorem ipsum dolor sit amet...", id: 2 },
+      { title: "welcome to the blog", body: loremBody, id: 1 },
+      { title: "top 5 CSS tricks", body: loremBody, id: 2 },
     ]);
 
     // const handleClick = () => {
