@@ -15,7 +15,7 @@ export default {
   components: { SinglePost },
   props: ["posts"],
   setup(props) {
-    console.log(props.posts);
+    /*     console.log(props.posts);
     onMounted(() => {
       console.log("PostsList mounted");
     });
@@ -24,11 +24,11 @@ export default {
     });
     onUpdated(() => {
       console.log("PostsList updated");
-    });
+    }); */
   },
-  mounted: () => {
+  /*   mounted: () => {
     console.log("PostsList mounted using oprions API");
-  },
+  }, */
 };
 </script>
 

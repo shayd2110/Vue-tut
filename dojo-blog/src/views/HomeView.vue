@@ -21,9 +21,14 @@
     <!-- <div v-for="name in matchedNames" :key="name">{{ name }}</div> -->
     <!-- <button @click="handleClick">Stop Watches</button> -->
 
-    <PostsList :posts="posts" v-if="showPosts" />
+    <!-- <PostsList :posts="posts" v-if="showPosts" /> -->
+    <div v-if="error">{{ error }}</div>
+    <div v-if="posts.length">
+      <PostsList :posts="posts" />
+    </div>
+    <div v-else>Loading...</div>
     <button @click="showPosts = !showPosts">toggle posts</button>
-    <button @click="posts.pop()">delete a post</button>
+    <!-- <button @click="posts.pop()">delete a post</button> -->
   </div>
 </template>
 
@@ -72,10 +77,14 @@ export default {
     }); */
     const loremBody =
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Hic eos ut delectus unde! Quae nulla nisi sed quasi dolorum quod doloribus cum commodi, ex dolores iure enim consequatur numquam iste expedita deserunt omnis perferendis pariatur eligendi natus tenetur ullam nobis asperiores. Aliquam nihil, enim, magni maiores saepe rerum, assumenda at libero reprehenderit aperiam provident in veniam explicabo laborum quaerat architecto dolor et corrupti quas error culpa? Voluptas sint odit quisquam doloribus incidunt quae facere ipsa illum consequatur natus, molestiae eligendi quam quasi, officiis suscipit dolores distinctio non. Animi vero consectetur officia, autem sequi impedit rerum aliquid sunt at vel voluptatum.";
-    const posts = ref([
+
+    // haedcoded posts data
+    /*     const posts = ref([
       { title: "welcome to the blog", body: loremBody, id: 1 },
       { title: "top 5 CSS tricks", body: loremBody, id: 2 },
-    ]);
+    ]); */
+    const posts = ref([]);
+    const error = ref(null);
 
     const showPosts = ref(true);
 
@@ -101,6 +110,21 @@ export default {
       stopWatchEffect();
     }; */
 
+    const load = async () => {
+      try {
+        let data = await fetch("http://localhost:3000/posts");
+        console.log(data);
+        if (!data.ok) {
+          throw Error("no data available");
+        }
+        posts.value = await data.json();
+      } catch (err) {
+        error.value = err.message;
+        console.log(error.value);
+      }
+    };
+    load();
+
     return {
       /* name, age, handleClick  , p */
       /* ninjaOne, updateNinjaOne, ninjaTwo, updateNinjaTwo, nameTwo */
@@ -110,6 +134,7 @@ export default {
       handleClick, */
       posts,
       showPosts,
+      error,
     };
   },
 };
