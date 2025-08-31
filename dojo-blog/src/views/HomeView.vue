@@ -14,12 +14,12 @@
     <p>{{ ninjaTwo.name }} - {{ ninjaTwo.age }} - {{ nameTwo }}</p>
     <button @click="updateNinjaTwo">Update ninjaTwo</button>
     -->
-    <input type="text" placeholder="search..." v-model="search" />
-    <p>search term: {{ search }}</p>
+    <!-- <input type="text" placeholder="search..." v-model="search" /> -->
+    <!-- <p>search term: {{ search }}</p> -->
     <!-- <div v-for="name in names" :key="name">{{ name }}</div> -->
-    <h3>Matched Names:</h3>
-    <div v-for="name in matchedNames" :key="name">{{ name }}</div>
-    <button @click="handleClick">Stop Watches</button>
+    <!-- <h3>Matched Names:</h3> -->
+    <!-- <div v-for="name in matchedNames" :key="name">{{ name }}</div> -->
+    <!-- <button @click="handleClick">Stop Watches</button> -->
   </div>
 </template>
 
@@ -45,9 +45,11 @@ export default {
     const nameTwo = reactive("netta");
  */
 
-    // computed values
+    /*     // computed values
     const names = ref(["mort", "netta", "yossi", "dana", "itay", "dorit", "yoni"]);
     const search = ref("");
+
+    // watchers
 
     const stopWatch = watch(search, () => {
       console.log("watch: search changed");
@@ -57,9 +59,15 @@ export default {
       console.log("watchEffect: search is now:", search.value);
     });
 
+    
+
     const matchedNames = computed(() => {
       return names.value.filter((name) => name.toLowerCase().includes(search.value.toLowerCase()));
-    });
+    }); */
+    const posts = ref([
+      { title: "welcome to the blog", body: "lorem ipsum dolor sit amet...", id: 1 },
+      { title: "top 5 CSS tricks", body: "lorem ipsum dolor sit amet...", id: 2 },
+    ]);
 
     // const handleClick = () => {
     //   /*
@@ -78,18 +86,19 @@ export default {
     //   // nameTwo = "netta the great"; /* won't work, nameTwo is not an object */
     // };
 
-    const handleClick = () => {
+    /*     const handleClick = () => {
       stopWatch();
       stopWatchEffect();
-    };
+    }; */
 
     return {
       /* name, age, handleClick  , p */
       /* ninjaOne, updateNinjaOne, ninjaTwo, updateNinjaTwo, nameTwo */
-      names,
+      /*       names,
       search,
       matchedNames,
-      handleClick,
+      handleClick, */
+      posts,
     };
   },
 };
