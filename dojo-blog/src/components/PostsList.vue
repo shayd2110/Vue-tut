@@ -26,6 +26,9 @@ export default {
       console.log("PostsList updated");
     });
   },
+  mounted: () => {
+    console.log("PostsList mounted using oprions API");
+  },
 };
 </script>
 

@@ -21,7 +21,9 @@
     <!-- <div v-for="name in matchedNames" :key="name">{{ name }}</div> -->
     <!-- <button @click="handleClick">Stop Watches</button> -->
 
-    <PostsList :posts="posts" />
+    <PostsList :posts="posts" v-if="showPosts" />
+    <button @click="showPosts = !showPosts">toggle posts</button>
+    <button @click="posts.pop()">delete a post</button>
   </div>
 </template>
 
@@ -63,7 +65,7 @@ export default {
       console.log("watchEffect: search is now:", search.value);
     });
 
-    
+
 
     const matchedNames = computed(() => {
       return names.value.filter((name) => name.toLowerCase().includes(search.value.toLowerCase()));
@@ -74,6 +76,8 @@ export default {
       { title: "welcome to the blog", body: loremBody, id: 1 },
       { title: "top 5 CSS tricks", body: loremBody, id: 2 },
     ]);
+
+    const showPosts = ref(true);
 
     // const handleClick = () => {
     //   /*
@@ -105,6 +109,7 @@ export default {
       matchedNames,
       handleClick, */
       posts,
+      showPosts,
     };
   },
 };
