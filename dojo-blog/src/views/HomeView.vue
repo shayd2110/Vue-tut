@@ -27,7 +27,7 @@
       <PostsList :posts="posts" />
     </div>
     <div v-else>Loading...</div>
-    <button @click="showPosts = !showPosts">toggle posts</button>
+    <!-- <button @click="showPosts = !showPosts">toggle posts</button> -->
     <!-- <button @click="posts.pop()">delete a post</button> -->
   </div>
 </template>
@@ -35,6 +35,7 @@
 <script>
 import { computed, reactive, ref, watch, watchEffect } from "vue";
 import PostsList from "@/components/PostsList.vue";
+import { getPosts } from "@/composables/getPosts";
 
 export default {
   name: "HomeView",
@@ -83,10 +84,11 @@ export default {
       { title: "welcome to the blog", body: loremBody, id: 1 },
       { title: "top 5 CSS tricks", body: loremBody, id: 2 },
     ]); */
-    const posts = ref([]);
-    const error = ref(null);
-
-    const showPosts = ref(true);
+    // const posts = ref([]);
+    // const error = ref(null);
+    const { posts, error, load } = getPosts();
+    load();
+    // const showPosts = ref(true);
 
     // const handleClick = () => {
     //   /*
@@ -110,7 +112,7 @@ export default {
       stopWatchEffect();
     }; */
 
-    const load = async () => {
+    /*     const load = async () => {
       try {
         let data = await fetch("http://localhost:3000/posts");
         console.log(data);
@@ -122,8 +124,8 @@ export default {
         error.value = err.message;
         console.log(error.value);
       }
-    };
-    load();
+    }; */
+    // load();
 
     return {
       /* name, age, handleClick  , p */
@@ -133,7 +135,7 @@ export default {
       matchedNames,
       handleClick, */
       posts,
-      showPosts,
+      // showPosts,
       error,
     };
   },

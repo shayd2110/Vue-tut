@@ -1,6 +1,9 @@
 <template>
-  <h2>{{ post.title }}</h2>
+  <router-link :to="{ name: 'Details', params: { id: post.id } }">
+    <h3>{{ post.title }}</h3>
+  </router-link>
   <p>{{ snippet }}</p>
+  <span v-for="tag in post.tags" :key="tag" class="tag">#{{ tag }}</span>
 </template>
 
 <script>
@@ -18,4 +21,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.tag {
+  background: #42b983;
+  color: white;
+  padding: 2px 6px;
+  margin-right: 4px;
+  border-radius: 4px;
+  font-size: 0.8em;
+}
+</style>
