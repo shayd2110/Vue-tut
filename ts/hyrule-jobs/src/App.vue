@@ -13,20 +13,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, reactive, ref, toRefs } from "vue";
 
 export default defineComponent({
   name: "App",
   components: {},
   setup() {
-    const state = reactive({
+    const name = ref("Mort");
+    const age = ref<number | string>(25);
+    const newName = ref("Mort");
+    const newAge = ref<number | string>(25);
+    return { name, age, newName, newAge };
+    /*     const state = reactive({
       name: "Mort",
       newName: "",
       age: 25 as number | string,
       newAge: "" as number | string,
     });
 
-    return { ...toRefs(state) };
+    return { ...toRefs(state) }; */
   },
   /*   data() {
     return {
