@@ -21,8 +21,8 @@ export default defineComponent({
   setup() {
     const name = ref("Mort");
     const age = ref<number | string>(25);
-    const newName = ref("Mort");
-    const newAge = ref<number | string>(25);
+    const newName = ref("");
+    const newAge = ref<number | string>("");
     return { name, age, newName, newAge };
     /*     const state = reactive({
       name: "Mort",
