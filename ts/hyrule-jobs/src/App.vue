@@ -1,6 +1,11 @@
 <template>
   <div class="app">
-    <JobsList :jobs="jobs" />
+    <header>
+      <button @click="handleClick('title')">order by title</button>
+      <button @click="handleClick('salary')">order by salary</button>
+      <button @click="handleClick('location')">order by location</button>
+    </header>
+    <JobsList :jobs="jobs" :order="order" />
     <!-- 
     hello {{ name }} - {{ age }}
     <label for="name">Name</label>
@@ -16,6 +21,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, toRefs } from "vue";
 import { Job } from "@/types/jobs";
+import { OrderTerm } from "./types/OrderTerm";
 import JobsList from "@/components/JobsList.vue";
 
 export default defineComponent({
@@ -29,7 +35,12 @@ export default defineComponent({
       { title: "fisherman", location: "lake hylia", salary: 21000, id: "4" },
       { title: "prison guard", location: "gerudo valley", salary: 32000, id: "5" },
     ]);
-    return { jobs };
+    const order = ref<OrderTerm>("title");
+
+    const handleClick = (term: OrderTerm) => {
+      order.value = term;
+    };
+    return { jobs, order, handleClick };
     /*     const name = ref("Mort");
     const age = ref<number | string>(25);
     const newName = ref("");
@@ -51,20 +62,34 @@ export default defineComponent({
       age: 25 as number | string,
     };
   }, */
-  methods: {
-    /*     changeName(newName: string) {
+  /*   methods: {
+         changeName(newName: string) {
       this.name = newName;
       return name;
     },
     changeAge(newAge: number | string) {
       this.age = newAge;
       return newAge;
-    }, */
-  },
+    }, 
+  }, */
 });
 </script>
 
 <style>
-#app {
+header {
+  text-align: center;
+}
+header .order {
+  margin-top: 20px;
+}
+button {
+  margin: 0 10px;
+  color: #1195c9;
+  border: 3px solid #1195c9;
+  background: #d5f0ff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
 }
 </style>
