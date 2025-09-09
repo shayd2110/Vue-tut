@@ -1,3 +1,5 @@
+import { DB_SERVER_URL } from "@/shared/consts";
+import { fetchAndDeletTask, fetchAndPatchIsFav, fetchAndPostTask, fetchAndProccess } from "@/utils/fetch";
 import { defineStore } from "pinia";
 
 export const useTaskStore = defineStore("taskStore", {
@@ -24,25 +26,27 @@ export const useTaskStore = defineStore("taskStore", {
   actions: {
     async getTasks() {
       this.loading = true;
-      const res = await fetch("http://localhost:3000/tasks");
-      const data = await res.json();
+      const data = await fetchAndProccess(DB_SERVER_URL);
       this.tasks = data;
       this.loading = false;
     },
 
-    addTask(task) {
+    async addTask(task) {
       this.tasks.push(task);
+      await fetchAndPostTask(DB_SERVER_URL, task);
     },
 
-    deleteTask(id) {
+    async deleteTask(id) {
       this.tasks = this.tasks.filter((task) => {
         return task.id !== id;
       });
+      await fetchAndDeletTask(DB_SERVER_URL, Number(id));
     },
 
-    toggleFav(id) {
+    async toggleFav(id) {
       const task = this.tasks.find((task) => task.id === id);
       task.isFav = !task.isFav;
+      await fetchAndPatchIsFav(DB_SERVER_URL, task);
     },
   },
 });
