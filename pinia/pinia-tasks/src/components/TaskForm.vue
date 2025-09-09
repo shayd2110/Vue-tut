@@ -20,7 +20,7 @@ export default {
           isFav: false,
           id: Math.floor(Math.random() * 10000),
         });
-        newTask = "";
+        newTask.value = "";
       }
     };
 
