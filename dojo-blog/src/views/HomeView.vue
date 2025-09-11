@@ -26,7 +26,7 @@
     <div v-if="posts.length">
       <PostsList :posts="posts" />
     </div>
-    <div v-else>Loading...</div>
+    <Spinner v-else />
     <!-- <button @click="showPosts = !showPosts">toggle posts</button> -->
     <!-- <button @click="posts.pop()">delete a post</button> -->
   </div>
@@ -36,10 +36,11 @@
 import { computed, reactive, ref, watch, watchEffect } from "vue";
 import PostsList from "@/components/PostsList.vue";
 import { getPosts } from "@/composables/getPosts";
+import Spinner from "@/components/Spinner.vue";
 
 export default {
   name: "HomeView",
-  components: { PostsList },
+  components: { PostsList, Spinner },
   setup: () => {
     /* declare p here to use it in setup()
     console.log("setup");
