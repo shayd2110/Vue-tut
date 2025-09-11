@@ -5,13 +5,15 @@
     <p class="pre">{{ post.body }}</p>
     <span v-for="tag in post.tags" :key="tag" class="tag">#{{ tag }}</span>
   </div>
-  <div v-else>Loading...</div>
+  <Spinner v-else />
 </template>
 
 <script>
+import Spinner from "@/components/Spinner.vue";
 import { getSinglePost } from "@/composables/getSinglePost";
 
 export default {
+  components: { Spinner },
   props: ["id"],
   setup(props) {
     console.log("Details setup, id:", props.id);
